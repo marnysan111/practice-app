@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TextField,Button,Grid } from '@material-ui/core/';
+import TodoList from './components/todo'
 
 export default function Practice() {
+  const [text, setTitle] = useState('')
+  const handleText = (e) => {
+    setTitle(()=>e.target.value)
+    alert(text)
+  }
+  
     return (
       <React.Fragment>
 
@@ -17,10 +24,9 @@ export default function Practice() {
 
           <Grid item xs={8}>
 
-            <form onSubmit={e => {
-              console.log(e.target.value)
-            }}>
+            <form>
               <Grid item>
+                <p>{text}</p>
                 <TextField label="Title" variant="outlined" id="title"/>
               </Grid>
               <Grid item>
@@ -29,6 +35,10 @@ export default function Practice() {
                 </Button>
               </Grid>
             </form>
+
+            <TodoList 
+              title = "test"
+            />
           </Grid>
 
         </Grid>
@@ -36,10 +46,3 @@ export default function Practice() {
       </React.Fragment>
     )
 };
-
-const todoList = (props) => {
-  console.log(props.title)
-  return (
-  <p>{props.title}</p>
-  )
-}
