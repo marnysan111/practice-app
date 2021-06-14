@@ -3,11 +3,11 @@ import { TextField,Button,Grid } from '@material-ui/core/';
 import TodoList from './components/todo'
 
 export default function Practice() {
-  const [text, setTitle] = useState('')
+  const [text, setTitle] = useState([])
   const handleText = (e) => {
     setTitle(()=>e.target.value)
   }
-  const todoTitles = [];
+  const [todoTitles, setTodoTitles] = useState('test')
     return (
       <React.Fragment>
 
@@ -30,11 +30,11 @@ export default function Practice() {
                 console.log("Error")
                 return
               }
-              todoTitles.push(todoTitle.value);
-              console.log(todoTitles)
+              setTodoTitles(todoTitle.value);
+              console.log(todoTitles);
+              todoTitle.value = "";
             }}>
               <Grid item>
-                <p>{text}</p>
                 <TextField label="Title" variant="outlined" id="title" onChange={handleText} />
               </Grid>
               <Grid item>
@@ -43,8 +43,8 @@ export default function Practice() {
                 </Button>
               </Grid>
             </form>
-
-            {todoTitles.map(todo => (<TodoList title={todo} />))}
+            <h1>List</h1>
+            <TodoList title={todoTitles} />
           </Grid>
 
         </Grid>
