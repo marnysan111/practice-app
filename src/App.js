@@ -6,9 +6,8 @@ export default function Practice() {
   const [text, setTitle] = useState('')
   const handleText = (e) => {
     setTitle(()=>e.target.value)
-    alert(text)
   }
-  
+  const todoTitles = [];
     return (
       <React.Fragment>
 
@@ -24,10 +23,19 @@ export default function Practice() {
 
           <Grid item xs={8}>
 
-            <form>
+            <form onSubmit={e => {
+              e.preventDefault();
+              const todoTitle = e.target.elements["title"];
+              if (todoTitle.value === "" ) {
+                console.log("Error")
+                return
+              }
+              todoTitles.push(todoTitle.value);
+              console.log(todoTitles)
+            }}>
               <Grid item>
                 <p>{text}</p>
-                <TextField label="Title" variant="outlined" id="title"/>
+                <TextField label="Title" variant="outlined" id="title" onChange={handleText} />
               </Grid>
               <Grid item>
                 <Button variant="contained" color="primary" type="submit">
@@ -36,9 +44,7 @@ export default function Practice() {
               </Grid>
             </form>
 
-            <TodoList 
-              title = "test"
-            />
+            {todoTitles.map(todo => (<TodoList title={todo} />))}
           </Grid>
 
         </Grid>
