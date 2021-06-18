@@ -7,7 +7,10 @@ export default function Practice() {
   const handleText = (e) => {
     setTitle(()=>e.target.value)
   }
-  const [todoTitles, setTodoTitles] = useState('test')
+  const [todoTitles, setTodoTitles] = useState([])
+  function addTodo(t) {
+    setTodoTitles({...todoTitles, t})
+  }
     return (
       <React.Fragment>
 
@@ -30,7 +33,8 @@ export default function Practice() {
                 console.log("Error")
                 return
               }
-              setTodoTitles(todoTitle.value);
+              //setTodoTitles(todoTitle.value);
+              addTodo(todoTitle.value)
               console.log(todoTitles);
               todoTitle.value = "";
             }}>
@@ -44,7 +48,11 @@ export default function Practice() {
               </Grid>
             </form>
             <h1>List</h1>
-            <TodoList title={todoTitles} />
+            {/*
+              {todoTitles.map((todo) => 
+              <TodoList title={todo} />
+            )}
+            */}
           </Grid>
 
         </Grid>
