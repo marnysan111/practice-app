@@ -7,6 +7,7 @@ export default function Practice() {
   function addTodo(t) {
     setTodoTitles((currentTodo) => {return [...currentTodo, t]});
   }
+  //テスト
     return (
       <React.Fragment>
 
