@@ -3,13 +3,9 @@ import { TextField,Button,Grid } from '@material-ui/core/';
 import TodoList from './components/todo'
 
 export default function Practice() {
-  const [text, setTitle] = useState([])
-  const handleText = (e) => {
-    setTitle(()=>e.target.value)
-  }
-  const [todoTitles, setTodoTitles] = useState([])
+  const [todoTitles, setTodoTitles] = useState(["test"]);
   function addTodo(t) {
-    setTodoTitles({...todoTitles, t})
+    setTodoTitles((currentTodo) => {return [...currentTodo, t]});
   }
     return (
       <React.Fragment>
@@ -27,19 +23,20 @@ export default function Practice() {
           <Grid item xs={8}>
 
             <form onSubmit={e => {
+              
               e.preventDefault();
               const todoTitle = e.target.elements["title"];
               if (todoTitle.value === "" ) {
                 console.log("Error")
+                todoTitle.value = null;
                 return
               }
-              //setTodoTitles(todoTitle.value);
               addTodo(todoTitle.value)
               console.log(todoTitles);
-              todoTitle.value = "";
+              todoTitle.value = null;
             }}>
               <Grid item>
-                <TextField label="Title" variant="outlined" id="title" onChange={handleText} />
+                <TextField label="Title" variant="outlined" id="title"/>
               </Grid>
               <Grid item>
                 <Button variant="contained" color="primary" type="submit">
@@ -48,11 +45,7 @@ export default function Practice() {
               </Grid>
             </form>
             <h1>List</h1>
-            {/*
-              {todoTitles.map((todo) => 
-              <TodoList title={todo} />
-            )}
-            */}
+            {todoTitles.map((todo) => <TodoList title={todo} />)}
           </Grid>
 
         </Grid>
